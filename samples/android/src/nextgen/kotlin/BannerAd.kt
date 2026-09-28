@@ -92,9 +92,11 @@ fun AdView.refreshingDynamicPrice(
 }
 
 @Composable
-fun BannerAdScreen(modifier: Modifier = Modifier) {
+fun BannerAdScreen(
+    modifier: Modifier = Modifier,
+    width: Int = LocalWindowInfo.current.containerDpSize.width.value.toInt(),
+) {
     val lifecycleOwner = LocalLifecycleOwner.current
-    val window = LocalWindowInfo.current
     Box {
         AdManagerInlineAd(
             onLoadAd = {
@@ -106,7 +108,7 @@ fun BannerAdScreen(modifier: Modifier = Modifier) {
                             adUnitId = BuildConfig.ADMANAGER_ADUNIT_ID,
                             adSize = AdSize.getCurrentOrientationAnchoredAdaptiveBannerAdSize(
                                 context = it.context,
-                                width = window.containerDpSize.width.value.toInt(),
+                                width = width,
                             ),
                         )
                     },
